@@ -16,7 +16,7 @@ export default function LoginScreen({ navigation }) {
     const handleLogin = () => {
         // Add your login logic here
         console.log('Login:', { username, password });
-        navigation.navigate('MainMenu'); // Navigate to MainMenu after login
+        navigation.navigate('MainMenu', { username }); // Pass username to MainMenu
     };
 
     const handleSignUpNavigation = () => {
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         color: "#2E2E2E",
         fontSize: 40,
         marginBottom: 40,
-        marginLeft: 139
+        textAlign: 'center'
     },
     label: {
         color: "#888888",
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     },
     footerContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         marginHorizontal: 84
     },
@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
     },
     signUpText: {
         color: "#00D7BD",
-        fontSize: 16
+        fontSize: 16,
+        marginLeft: 5
     }
 });
