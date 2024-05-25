@@ -3,7 +3,7 @@ import { SafeAreaView, View, ScrollView, Image, Text, TextInput, TouchableOpacit
 
 const melaudio = require('../assets/melaudio.png');
 
-export default ({ onLogin }) => {
+export default function LoginScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -16,12 +16,11 @@ export default ({ onLogin }) => {
     const handleLogin = () => {
         // Add your login logic here
         console.log('Login:', { username, password });
-        onLogin(); // Call onLogin prop when login is successful
+        navigation.navigate('MainMenu'); // Navigate to MainMenu after login
     };
 
     const handleSignUpNavigation = () => {
-        // Navigate to the sign-up screen
-        console.log('Navigate to Sign Up Screen');
+        navigation.navigate('SignUp'); // Navigate to the sign-up screen
     };
 
     const handleForgotPassword = () => {
