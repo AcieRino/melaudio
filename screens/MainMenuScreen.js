@@ -28,7 +28,7 @@ export default function MainMenuScreen({ route, navigation }) {
                         <Image source={require('../assets/online-lessons.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Online Lessons</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('Social Network')}>
+                    <TouchableOpacity style={styles.card} onPress={() => handlePress('SocialNetwork')}>
                         <Image source={require('../assets/social-network.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Social Network</Text>
                     </TouchableOpacity>
@@ -36,7 +36,7 @@ export default function MainMenuScreen({ route, navigation }) {
                         <Image source={require('../assets/progress.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Progress Tracker</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('Learn & Share')}>
+                    <TouchableOpacity style={styles.card} onPress={() => handlePress('LearnAndShare')}>
                         <Image source={require('../assets/learn-share.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Learn & Share</Text>
                     </TouchableOpacity>
