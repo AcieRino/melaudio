@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window');
 const melaudio = require('../assets/melaudio.png');
 
 export default function MainMenuScreen({ route }) {
-    const { username } = route.params;
+    const { username } = route.params || {};
 
     const handlePress = (cardName) => {
         console.log(`${cardName} pressed`);

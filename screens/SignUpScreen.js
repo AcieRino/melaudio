@@ -28,7 +28,7 @@ export default function SignUpScreen({ navigation }) {
         }
         // Add sign-up logic here
         console.log('Sign-Up:', { username, password, reenterPassword, email });
-        navigation.navigate('MainMenu'); // Navigate to MainMenu after sign-up
+        navigation.navigate('MainMenu', { username }); // Navigate to MainMenu after sign-up and pass username
     };
 
     const handleLoginNavigation = () => {

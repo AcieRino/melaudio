@@ -16,22 +16,22 @@ const LessonCard = ({ title, isCompleted, onPress }) => (
   </TouchableOpacity>
 );
 
-const handleBackPress = () => {
-  console.log('Back button pressed');
-};
+export default function ProgressTrackerScreen({ navigation }) {
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
 
-const handleLessonPress = (title) => {
-  console.log(`${title} clicked`);
-};
+  const handleLessonPress = (title) => {
+    console.log(`${title} clicked`);
+  };
 
-export default () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <Image
-              source={require('./assets/melaudio.png')}
+              source={require('../assets/melaudio.png')}
               resizeMode="stretch"
               style={styles.logoImage}
             />
@@ -39,7 +39,7 @@ export default () => {
           </View>
         </View>
         <TouchableOpacity onPress={handleBackPress}>
-          <Image source={require('./assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
+          <Image source={require('../assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
         </TouchableOpacity>
         <Text style={styles.mainTitle}>Progress Tracker</Text>
         <Text style={styles.subTitle}>Lessons</Text>
@@ -62,7 +62,7 @@ export default () => {
       </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   safeArea: {
