@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView, View, ScrollView, Image, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 
-export default (props) => {
+export default function MusicLibraryScreen({ navigation }) {
     const [searchText, setSearchText] = useState("");
 
     const songs = [
@@ -24,7 +24,7 @@ export default (props) => {
     };
 
     const handleBackPress = () => {
-        console.log('Back button pressed');
+        navigation.goBack();
     };
 
     return (
@@ -32,12 +32,12 @@ export default (props) => {
             <ScrollView style={styles.scrollView}>
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
-                        <Image source={require('./assets/melaudio.png')} resizeMode="stretch" style={styles.logoImage} />
+                        <Image source={require('../assets/melaudio.png')} resizeMode="stretch" style={styles.logoImage} />
                         <Text style={styles.logoText}>Melaudio</Text>
                     </View>
                 </View>
                 <TouchableOpacity onPress={handleBackPress}>
-                    <Image source={require('./assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
+                    <Image source={require('../assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
                 </TouchableOpacity>
                 <Text style={styles.libraryTitle}>Music Library</Text>
                 <View style={styles.searchBox}>
@@ -55,7 +55,7 @@ export default (props) => {
                             <Text style={styles.songArtist}>{song.artist}</Text>
                         </View>
                         <TouchableOpacity onPress={() => handleSongPress(song.title)}>
-                            <Image source={require('./assets/play.png')} resizeMode="stretch" style={styles.songImage} />
+                            <Image source={require('../assets/play.png')} resizeMode="stretch" style={styles.songImage} />
                         </TouchableOpacity>
                     </View>
                 ))}

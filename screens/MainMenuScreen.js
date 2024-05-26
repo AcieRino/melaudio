@@ -40,7 +40,7 @@ export default function MainMenuScreen({ route, navigation }) {
                         <Image source={require('../assets/learn-share.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Learn & Share</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('Music Library')}>
+                    <TouchableOpacity style={styles.card} onPress={() => handlePress('MusicLibrary')}>
                         <Image source={require('../assets/music-library.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Music Library</Text>
                     </TouchableOpacity>
