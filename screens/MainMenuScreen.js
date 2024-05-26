@@ -4,11 +4,11 @@ import { SafeAreaView, View, Image, Text, StyleSheet, TouchableOpacity, Dimensio
 const { width } = Dimensions.get('window');
 const melaudio = require('../assets/melaudio.png');
 
-export default function MainMenuScreen({ route }) {
+export default function MainMenuScreen({ route, navigation }) {
     const { username } = route.params || {};
 
-    const handlePress = (cardName) => {
-        console.log(`${cardName} pressed`);
+    const handlePress = (screen) => {
+        navigation.navigate(screen);
     };
 
     return (
@@ -32,7 +32,7 @@ export default function MainMenuScreen({ route }) {
                         <Image source={require('../assets/social-network.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Social Network</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('Progress Tracker')}>
+                    <TouchableOpacity style={styles.card} onPress={() => handlePress('ProgressTracker')}>
                         <Image source={require('../assets/progress.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Progress Tracker</Text>
                     </TouchableOpacity>
