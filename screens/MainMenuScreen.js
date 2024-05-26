@@ -24,7 +24,7 @@ export default function MainMenuScreen({ route, navigation }) {
                 <Text style={styles.helloText}>Hello</Text>
                 <Text style={styles.nameText}>{username}</Text>
                 <View style={styles.grid}>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('Online Lessons')}>
+                    <TouchableOpacity style={styles.card} onPress={() => handlePress('OnlineLessons')}>
                         <Image source={require('../assets/online-lessons.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Online Lessons</Text>
                     </TouchableOpacity>

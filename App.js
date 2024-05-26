@@ -5,6 +5,7 @@ import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import MainMenuScreen from './screens/MainMenuScreen';
 import ProgressTrackerScreen from './screens/ProgressTrackerScreen';
+import OnlineLessonsScreen from './screens/OnlineLessonsScreen'; // Import the OnlineLessonsScreen
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="MainMenu" component={MainMenuScreen} options={{ headerShown: false }} />
         <Stack.Screen name="ProgressTracker" component={ProgressTrackerScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="OnlineLessons" component={OnlineLessonsScreen} options={{ headerShown: false }} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,3 +1,4 @@
+// screens/OnlineLessonsScreen.js
 import React, { useState, useRef } from "react";
 import { SafeAreaView, View, ScrollView, Image, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 
@@ -27,7 +28,7 @@ const CarouselOption = ({ item, isSelected, onPress }) => {
   );
 };
 
-export default (props) => {
+export default function OnlineLessonsScreen({ navigation }) {
   const [selectedInstrumentIndex, setSelectedInstrumentIndex] = useState(0);
   const [selectedInstructorIndex, setSelectedInstructorIndex] = useState(0);
   const instrumentCarouselRef = useRef(null);
@@ -47,20 +48,24 @@ export default (props) => {
     }
   };
 
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
           <Image
-            source={require('./assets/melaudio.png')}
+            source={require('../assets/melaudio.png')}
             resizeMode="stretch"
             style={styles.logo}
           />
           <Text style={styles.logoText}>Melaudio</Text>
         </View>
 
-        <TouchableOpacity onPress={handleStartPress}>
-          <Image source={require('./assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
+        <TouchableOpacity onPress={handleBackPress}>
+          <Image source={require('../assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
         </TouchableOpacity>
         <Text style={styles.title}>Online Lessons</Text>
 
@@ -149,14 +154,14 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     marginBottom: 14,
-    alignSelf: "left",
+    alignSelf: "flex-start",
     marginLeft: 20,
   },
   title: {
     color: "#5B5A5A",
     fontSize: 32,
     marginBottom: 22,
-    alignSelf: "left",
+    alignSelf: "flex-start",
     marginLeft: 20,
   },
   divider: {
