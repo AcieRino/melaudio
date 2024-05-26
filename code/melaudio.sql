@@ -28,6 +28,9 @@ CREATE TABLE `admin` (
   `permissions` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `admin` (`admin_id`, `permissions`) VALUES
+(1, 'Πρόσβαση σε βιβλιοθήκη.');
 -- --------------------------------------------------------
 
 --
@@ -43,6 +46,9 @@ CREATE TABLE `excersize` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `excersize` (`excersize_id`, `instrument_id`, `name`, `level`, `score`, `description`) VALUES
+(1, 1, 'first exersize', 'beginner', 5, 'Είναι μία άσκηση αναγνώρισης της νότας που παίζεται στο πιάνο.');
 -- --------------------------------------------------------
 
 --
@@ -57,6 +63,9 @@ CREATE TABLE `feedback` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `feedback` (`feedback_id`, `teacher_id`, `student_id`, `content`, `date`) VALUES
+(1, 2, 1, 'Τα πας καλά. Συνέχισε έτσι.', '2024-05-22');
 -- --------------------------------------------------------
 
 --
@@ -68,6 +77,12 @@ CREATE TABLE `instrument` (
   `name` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `instrument` (`instrument_id`, `name`, `type`) VALUES
+(1, 'piano', 'keyboard intsument'),
+(2, 'guitar', 'string instrument'),
+(3, 'flute', 'woodwind intrument');
 
 -- --------------------------------------------------------
 
@@ -85,6 +100,9 @@ CREATE TABLE `lesson` (
   `level` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `lesson` (`lesson_id`, `teacher_id`, `student_id`, `title`, `description`, `url`, `level`) VALUES
+(1, 2, 1, 'Οι νότες στο πιάνο', 'Είναι μάθημα εκμάθησης των νοτών στο πιάνο.', 'https://melaudio.com/piano_lesson_1', 'beginner');
 -- --------------------------------------------------------
 
 --
@@ -97,6 +115,10 @@ CREATE TABLE `library` (
   `user_type` varchar(50) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `library` (`library_id`, `resource`, `user_type`, `date`) VALUES
+(1, 'instrument sheet', 'teacher', '2024-05-20');
 
 -- --------------------------------------------------------
 
@@ -164,6 +186,10 @@ CREATE TABLE `student` (
   `level` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+INSERT INTO `student` (`user_id`, `instrument`, `level`) VALUES
+(1, 'piano', 'beginner');
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +201,10 @@ CREATE TABLE `teacher` (
   `cv` text NOT NULL,
   `instrument` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `teacher` (`user_id`, `cv`, `instrument`) VALUES
+(2, 'Ονομάζομαι Μαρία Καρναβά και ειμαι 23 χρονών. Έχω τελειώσει το τμήμα μουσικών σπουδών με ειδίκευση στο πιάνο και την άρπα. Ακόμη ξέρω να παίζω πολύ καλά κιθάρα.', 'piano');
 
 -- --------------------------------------------------------
 
@@ -188,6 +218,11 @@ CREATE TABLE `user` (
   `password` varchar(16) NOT NULL,
   `user_type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `user_type`) VALUES
+(1, 'iliS', 'ili!_S2000', 'student'),
+(2, 'maria', 'karv99', 'teacher');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
