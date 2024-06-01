@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Ξ•ΞΎΟ…Ο€Ξ·ΟΞµΟ„Ξ·Ο„Ξ®Ο‚: 127.0.0.1
--- Ξ§ΟΟΞ½ΞΏΟ‚ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚: 01 Ξ™ΞΏΟ…Ξ½ 2024 ΟƒΟ„ΞΉΟ‚ 02:02:49
+-- Ξ§ΟΟΞ½ΞΏΟ‚ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚: 01 Ξ™ΞΏΟ…Ξ½ 2024 ΟƒΟ„ΞΉΟ‚ 12:18:51
 -- ΞΞΊΞ΄ΞΏΟƒΞ· Ξ΄ΞΉΞ±ΞΊΞΏΞΌΞΉΟƒΟ„Ξ®: 10.4.22-MariaDB
 -- ΞΞΊΞ΄ΞΏΟƒΞ· PHP: 8.1.1
 
@@ -59,7 +59,7 @@ CREATE TABLE `excercise` (
 --
 
 INSERT INTO `excercise` (`description`, `excersize_id`, `instument_id`, `level`, `name`, `score`) VALUES
-('This technique involves holding your violin in a playing position and using your fingers to pull and release the strings, creating a sound without the bow.', 1, 4, 'beginner', 'Basic plucking', 0),
+('This technique involves holding your violin in a playing position and using your fingers to pull and release the strings, creating a sound without the bow.', 1, 3, 'beginner', 'Basic plucking', 0),
 ('Just like with snare drum, my routine is influenced by the skills needed to play the repertoire. The most basic skill to start with is single strokes (like stick control) and I focus on them using basic major scales. I start every mallet practice session with scales. This gives me an opportunity to re-familiarize myself with the spacing of the keys, remind myself of good stick control strokes, and do all of this with an exercise that allows me to focus on these technical elements and not be distracted by something that is very complex. If I start out with something too complex in terms of accuracy it is harder for me to check my technical execution because my focus is diverted. I will start with a very slow tempo and then slowly move up. If 140 is my top tempo that day I might work up to that by starting at 90, then 110, then 125, then 135, and finally 140. Much like weight lifting (if you are curious read my previous blog post) I start very slow to check my technique (or form) and build up to a faster tempo to work on stretching my abilities. This philosophy of how to move up in tempo can be applied to the rest of the exercises discussed today.', 4, 4, 'beginner', 'Two Mallets', 2);
 
 -- --------------------------------------------------------
@@ -121,6 +121,15 @@ CREATE TABLE `lesson` (
   `teacher_id` int(11) NOT NULL,
   `url` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Ξ†Ξ΄ΞµΞΉΞ±ΟƒΞΌΞ± Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½ Ο„ΞΏΟ… Ο€Ξ―Ξ½Ξ±ΞΊΞ± `lesson`
+--
+
+INSERT INTO `lesson` (`lesson_id`, `description`, `tittle`, `instument_id`, `level`, `student_id`, `teacher_id`, `url`) VALUES
+(2, 'learning how to play basic violin skills', 'violin1.1', 3, 'beginner', 1, 8, 'www.iiopp'),
+(6, 'learn advanced flute harmonies', 'flute harmonies', 1, 'advanced', 6, 9, 'www.fghjk'),
+(7, 'learning basic xylophne skills', 'xylophone1.1', 4, 'beginner', 6, 5, 'www.ghkl');
 
 -- --------------------------------------------------------
 
@@ -226,8 +235,8 @@ INSERT INTO `social_network` (`forum_id`, `name`, `description`, `member_id`) VA
 
 CREATE TABLE `student` (
   `student_id` int(4) NOT NULL,
-  `instrument_id` int(4) NOT NULL,
-  `level` enum('beginner','intermediate','advanced') NOT NULL
+  `instrument_id` int(4) DEFAULT NULL,
+  `level` enum('beginner','intermediate','advanced') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -236,7 +245,7 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`student_id`, `instrument_id`, `level`) VALUES
 (1, 4, 'beginner'),
-(4, 1, 'beginner'),
+(4, 3, 'beginner'),
 (6, 1, 'advanced'),
 (10, 2, 'intermediate');
 
@@ -248,8 +257,8 @@ INSERT INTO `student` (`student_id`, `instrument_id`, `level`) VALUES
 
 CREATE TABLE `teacher` (
   `user_id` int(4) NOT NULL,
-  `cv` text NOT NULL,
-  `instrument_id` int(4) NOT NULL
+  `cv` text DEFAULT NULL,
+  `instrument_id` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -260,7 +269,7 @@ INSERT INTO `teacher` (`user_id`, `cv`, `instrument_id`) VALUES
 (2, 'CV content for teacher1', 2),
 (5, 'CV content', 1),
 (8, 'CV content', 3),
-(9, 'cv', 3);
+(9, 'cv', 4);
 
 -- --------------------------------------------------------
 
@@ -372,7 +381,8 @@ ALTER TABLE `social_network`
 -- Ξ•Ο…ΟΞµΟ„Ξ®ΟΞΉΞ± Ξ³ΞΉΞ± Ο€Ξ―Ξ½Ξ±ΞΊΞ± `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`student_id`);
+  ADD PRIMARY KEY (`student_id`),
+  ADD KEY `isn` (`instrument_id`);
 
 --
 -- Ξ•Ο…ΟΞµΟ„Ξ®ΟΞΉΞ± Ξ³ΞΉΞ± Ο€Ξ―Ξ½Ξ±ΞΊΞ± `teacher`
@@ -413,7 +423,7 @@ ALTER TABLE `instrument`
 -- AUTO_INCREMENT Ξ³ΞΉΞ± Ο€Ξ―Ξ½Ξ±ΞΊΞ± `lesson`
 --
 ALTER TABLE `lesson`
-  MODIFY `lesson_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `lesson_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT Ξ³ΞΉΞ± Ο€Ξ―Ξ½Ξ±ΞΊΞ± `library`
@@ -512,6 +522,7 @@ ALTER TABLE `social_network`
 -- Ξ ΞµΟΞΉΞΏΟΞΉΟƒΞΌΞΏΞ― Ξ³ΞΉΞ± Ο€Ξ―Ξ½Ξ±ΞΊΞ± `student`
 --
 ALTER TABLE `student`
+  ADD CONSTRAINT `isn` FOREIGN KEY (`instrument_id`) REFERENCES `instrument` (`instument_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `s1` FOREIGN KEY (`student_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
