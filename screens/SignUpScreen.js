@@ -43,7 +43,9 @@ export default function SignUpScreen({ navigation }) {
         axios.post('http://192.168.1.4:3000/api/signup', signupData)
             .then(response => {
                 if (response.data.success) {
-                    navigation.navigate('MainMenu', { username }); // Navigate to MainMenu after sign-up and pass username
+                    Alert.alert('Success', 'Account was created successfully', [
+                        { text: 'OK', onPress: () => navigation.navigate('Login') }
+                    ]);
                 } else {
                     Alert.alert('Error', response.data.message);
                 }
