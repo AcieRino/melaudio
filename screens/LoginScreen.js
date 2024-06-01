@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 20,
-        marginHorizontal: 7
+        marginHorizontal: 7,
+        paddingTop: 20,
     },
     logoContainer: {
         flex: 1,
@@ -126,13 +127,14 @@ const styles = StyleSheet.create({
         marginRight: 4
     },
     logoImage: {
-        width: 79,
-        height: 75
+        width: 50,
+        height: 50,
+        marginRight: 2,
     },
     logoText: {
-        color: "#0A4F5E",
+        color: "#00D7BD",
         fontSize: 24,
-        marginLeft: 10
+        marginLeft: 2
     },
     loginText: {
         color: "#2E2E2E",

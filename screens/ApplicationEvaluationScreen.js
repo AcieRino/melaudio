@@ -28,15 +28,11 @@ const ExpandedApplication = ({ applicantName, applicationDetails, onActionPress 
   </View>
 );
 
-const handleBackPress = () => {
-  console.log('Back button pressed');
-};
-
 const handleActionPress = (action) => {
   console.log(`${action} pressed`);
 };
 
-export default () => {
+export default function EvaluateTeachersScreen({ navigation }) {
   const applications = [
     { name: "John Doe", details: "Piano Teacher" },
     { name: "Emily Williams", details: "Violin Teacher" },
@@ -51,17 +47,13 @@ export default () => {
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <Image
-              source={require('./assets/melaudio.png')}
+              source={require('../assets/melaudio.png')}
               resizeMode="stretch"
               style={styles.logoImage}
             />
             <Text style={styles.headerTitle}>Melaudio</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={handleBackPress}>
-          <Image source={require('./assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-        </TouchableOpacity>
-        <Text style={styles.mainTitle}>Evaluation of Applications</Text>
 
         {applications.map((application, index) => (
           <View key={`application-${index}`}>
@@ -114,18 +106,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: "#00D7BD",
     fontSize: 24,
-  },
-  mainImage: {
-    width: 30,
-    height: 30,
-    marginBottom: 20,
-    marginHorizontal: 28,
-  },
-  mainTitle: {
-    color: "#5B5A5A",
-    fontSize: 32,
-    marginBottom: 20,
-    marginLeft: 30,
   },
   applicationFrame: {
     backgroundColor: "#00D7BD",

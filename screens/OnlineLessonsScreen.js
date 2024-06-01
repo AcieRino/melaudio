@@ -1,5 +1,3 @@
-
-// screens/OnlineLessonsScreen.js
 import React, { useState, useRef } from "react";
 import { SafeAreaView, View, ScrollView, Image, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 
@@ -49,8 +47,8 @@ export default function OnlineLessonsScreen({ navigation }) {
     }
   };
 
-  const handleBackPress = () => {
-    navigation.goBack();
+  const handleLiveLessonsPress = () => {
+    navigation.navigate('AvailableHours'); // Navigate to the AvailableHours screen
   };
 
   return (
@@ -64,11 +62,6 @@ export default function OnlineLessonsScreen({ navigation }) {
           />
           <Text style={styles.logoText}>Melaudio</Text>
         </View>
-
-        <TouchableOpacity onPress={handleBackPress}>
-          <Image source={require('../assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-        </TouchableOpacity>
-        <Text style={styles.title}>Online Lessons</Text>
 
         <View style={styles.divider} />
 
@@ -119,6 +112,10 @@ export default function OnlineLessonsScreen({ navigation }) {
         <TouchableOpacity onPress={handleStartPress} style={styles.startButtonContainer}>
           <Text style={styles.startButtonText}>START</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={handleLiveLessonsPress} style={styles.liveLessonsContainer}>
+          <Text style={styles.liveLessonsText}>Live Lessons</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -150,20 +147,6 @@ const styles = StyleSheet.create({
   logoText: {
     color: "#00D7BD",
     fontSize: 24,
-  },
-  mainImage: {
-    width: 30,
-    height: 30,
-    marginBottom: 14,
-    alignSelf: "flex-start",
-    marginLeft: 20,
-  },
-  title: {
-    color: "#5B5A5A",
-    fontSize: 32,
-    marginBottom: 22,
-    alignSelf: "flex-start",
-    marginLeft: 20,
   },
   divider: {
     height: 2,
@@ -226,5 +209,14 @@ const styles = StyleSheet.create({
     color: "#FFFFFF", 
     fontSize: 26,
     textAlign: 'center'
+  },
+  liveLessonsContainer: {
+    marginTop: 20,
+    alignSelf: 'center',
+  },
+  liveLessonsText: {
+    color: "#00D7BD",
+    fontSize: 20,
+    textDecorationLine: 'underline',
   },
 });

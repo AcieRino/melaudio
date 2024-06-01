@@ -10,10 +10,6 @@ const ProfileButton = ({ name, role, onPress }) => (
   </TouchableOpacity>
 );
 
-const handleBackPress = () => {
-  console.log('Back button pressed');
-};
-
 const handleProfilePress = (name, role) => {
   console.log(`${role} ${name} clicked`);
 };
@@ -40,17 +36,13 @@ export default () => {
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <Image
-              source={require('./assets/melaudio.png')}
+              source={require('../assets/melaudio.png')}
               resizeMode="stretch"
               style={styles.logoImage}
             />
             <Text style={styles.headerTitle}>Melaudio</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={handleBackPress}>
-          <Image source={require('./assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-        </TouchableOpacity>
-        <Text style={styles.mainTitle}>User Manager</Text>
 
         <View style={styles.violationContainer}>
           <Text style={styles.violationText}>Violation of rules by users: {randomUserName}</Text>
@@ -117,18 +109,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: "#00D7BD",
     fontSize: 24,
-  },
-  mainImage: {
-    width: 30,
-    height: 30,
-    marginBottom: 20,
-    marginHorizontal: 28,
-  },
-  mainTitle: {
-    color: "#5B5A5A",
-    fontSize: 32,
-    marginBottom: 20,
-    marginLeft: 30,
   },
   violationContainer: {
     backgroundColor: "#FFD700",

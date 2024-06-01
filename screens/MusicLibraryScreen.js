@@ -23,10 +23,6 @@ export default function MusicLibraryScreen({ navigation }) {
         console.log(`${songTitle} pressed`);
     };
 
-    const handleBackPress = () => {
-        navigation.goBack();
-    };
-
     return (
         <SafeAreaView style={styles.safeArea}>
             <ScrollView style={styles.scrollView}>
@@ -36,10 +32,6 @@ export default function MusicLibraryScreen({ navigation }) {
                         <Text style={styles.logoText}>Melaudio</Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={handleBackPress}>
-                    <Image source={require('../assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-                </TouchableOpacity>
-                <Text style={styles.libraryTitle}>Music Library</Text>
                 <View style={styles.searchBox}>
                     <TextInput
                         style={styles.searchInput}
@@ -94,18 +86,6 @@ const styles = StyleSheet.create({
     logoText: {
         color: "#00D7BD",
         fontSize: 24,
-    },
-    mainImage: {
-        width: 30,
-        height: 30,
-        marginBottom: 20,
-        marginHorizontal: 28,
-    },
-    libraryTitle: {
-        color: "#5B5A5A",
-        fontSize: 32,
-        marginBottom: 51,
-        marginLeft: 29,
     },
     searchBox: {
         borderRadius: 20,

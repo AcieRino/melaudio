@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, View, ScrollView, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const ProgressItem = ({ color, label }) => (
@@ -10,7 +9,7 @@ const ProgressItem = ({ color, label }) => (
 );
 
 const LessonCard = ({ title, isCompleted, onPress }) => (
-  <TouchableOpacity onPress={() => onPress(title)}>
+  <TouchableOpacity onPress={onPress}>
     <View style={[styles.lessonCard, isCompleted ? styles.lessonCompletedCard : styles.lessonIncompleteCard]}>
       <Text style={styles.lessonCardText}>{title}</Text>
     </View>
@@ -18,12 +17,22 @@ const LessonCard = ({ title, isCompleted, onPress }) => (
 );
 
 export default function ProgressTrackerScreen({ navigation }) {
-  const handleBackPress = () => {
-    navigation.goBack();
+  const [expandedLesson, setExpandedLesson] = useState(null);
+
+  const handleLessonPress = (index, isCompleted) => {
+    if (expandedLesson === index) {
+      setExpandedLesson(null); // Collapse if the same lesson is clicked again
+    } else {
+      setExpandedLesson(index); // Expand the clicked lesson
+    }
   };
 
-  const handleLessonPress = (title) => {
-    console.log(`${title} clicked`);
+  const handleExpandedPress = (isCompleted) => {
+    if (isCompleted) {
+      console.log('Show exercises button pressed');
+    } else {
+      console.log('Complete lesson button pressed');
+    }
   };
 
   return (
@@ -39,10 +48,6 @@ export default function ProgressTrackerScreen({ navigation }) {
             <Text style={styles.headerTitle}>Melaudio</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={handleBackPress}>
-          <Image source={require('../assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-        </TouchableOpacity>
-        <Text style={styles.mainTitle}>Progress Tracker</Text>
         <Text style={styles.subTitle}>Lessons</Text>
 
         <View style={styles.progressContainer}>
@@ -51,14 +56,27 @@ export default function ProgressTrackerScreen({ navigation }) {
         </View>
 
         <View style={styles.lessonsContainer}>
-          {Array.from({ length: 12 }, (_, index) => (
-            <LessonCard 
-              key={index} 
-              title={`Lesson ${index + 1}`} 
-              isCompleted={index < 5} 
-              onPress={handleLessonPress} 
-            />
-          ))}
+          {Array.from({ length: 12 }, (_, index) => {
+            const isCompleted = index < 5;
+            return (
+              <View key={index}>
+                <LessonCard 
+                  title={`Lesson ${index + 1}`} 
+                  isCompleted={isCompleted} 
+                  onPress={() => handleLessonPress(index, isCompleted)} 
+                />
+                {expandedLesson === index && (
+                  <TouchableOpacity onPress={() => handleExpandedPress(isCompleted)}>
+                    <View style={[styles.expandedContainer, { backgroundColor: isCompleted ? 'rgba(165, 215, 110, 0.7)' : 'rgba(210, 85, 90, 0.7)' }]}>
+                      <Text style={styles.expandedText}>
+                        {isCompleted ? "Show Exercises" : "Complete Lesson"}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              </View>
+            );
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -95,18 +113,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: "#00D7BD",
     fontSize: 24,
-  },
-  mainImage: {
-    width: 30,
-    height: 30,
-    marginBottom: 20,
-    marginHorizontal: 28,
-  },
-  mainTitle: {
-    color: "#5B5A5A",
-    fontSize: 32,
-    marginBottom: 20,
-    marginLeft: 30,
   },
   subTitle: {
     color: "#5B5B5B",
@@ -159,5 +165,16 @@ const styles = StyleSheet.create({
   lessonCardText: {
     fontSize: 18,
     color: "#FFFFFF",
+  },
+  expandedContainer: {
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    alignItems: "center",
+  },
+  expandedText: {
+    fontSize: 16,
+    color: "#333",
   },
 });

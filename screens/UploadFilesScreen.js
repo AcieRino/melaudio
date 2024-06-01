@@ -36,34 +36,30 @@ const FileUploadForm = () => {
   );
 };
 
-const handleBackPress = () => {
-  console.log('Back button pressed');
-};
+export default function UploadFilesScreen({ navigation }) {
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
 
-export default () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <Image
-              source={require('./assets/melaudio.png')}
+              source={require('../assets/melaudio.png')}
               resizeMode="stretch"
               style={styles.logoImage}
             />
             <Text style={styles.headerTitle}>Melaudio</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={handleBackPress}>
-          <Image source={require('./assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-        </TouchableOpacity>
-        <Text style={styles.mainTitle}>Upload Files</Text>
 
         <FileUploadForm />
       </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -95,18 +91,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: "#00D7BD",
     fontSize: 24,
-  },
-  mainImage: {
-    width: 30,
-    height: 30,
-    marginBottom: 20,
-    marginHorizontal: 28,
-  },
-  mainTitle: {
-    color: "#5B5A5A",
-    fontSize: 32,
-    marginBottom: 20,
-    marginLeft: 30,
   },
   uploadForm: {
     backgroundColor: "#FFFFFF",

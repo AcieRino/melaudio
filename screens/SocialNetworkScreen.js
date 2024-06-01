@@ -70,10 +70,6 @@ export default function SocialNetworkScreen({ navigation }) {
                         <Text style={styles.logoText}>Melaudio</Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={handleBackPress}>
-                    <Image source={require('../assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-                </TouchableOpacity>
-                <Text style={styles.title}>Social Network</Text>
                 <View style={styles.searchBox}>
                     <TextInput
                         style={styles.searchInput}
@@ -178,18 +174,6 @@ const styles = StyleSheet.create({
     logoText: {
         color: "#00D7BD",
         fontSize: 24,
-    },
-    mainImage: {
-        width: 30,
-        height: 30,
-        marginBottom: 20,
-        marginHorizontal: 28,
-    },
-    title: {
-        color: "#5B5A5A",
-        fontSize: 32,
-        marginBottom: 20,
-        marginLeft: 29,
     },
     searchBox: {
         flexDirection: "row",

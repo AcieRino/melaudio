@@ -10,10 +10,6 @@ const TimeSlot = ({ day, hour, isSelected, isConfirmed, onPress }) => (
   </TouchableOpacity>
 );
 
-const handleBackPress = () => {
-  console.log('Back button pressed');
-};
-
 export default () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [confirmedTimeSlot, setConfirmedTimeSlot] = useState(null);
@@ -40,18 +36,14 @@ export default () => {
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <Image
-              source={require('./assets/melaudio.png')}
+              source={require('../assets/melaudio.png')}
               resizeMode="stretch"
               style={styles.logoImage}
             />
             <Text style={styles.headerTitle}>Melaudio</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={handleBackPress}>
-          <Image source={require('./assets/back.png')} resizeMode="stretch" style={styles.mainImage} />
-        </TouchableOpacity>
-        <Text style={styles.mainTitle}>Available Hours</Text>
-        <Text style={styles.subTitle}>Select your available hours</Text>
+        <Text style={styles.subTitle}>Select an available hour</Text>
 
         <View style={styles.timeSlotsContainer}>
           {['Monday', 'Wednesday', 'Friday'].map((day) =>
@@ -128,18 +120,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: "#00D7BD",
     fontSize: 24,
-  },
-  mainImage: {
-    width: 30,
-    height: 30,
-    marginBottom: 20,
-    marginHorizontal: 28,
-  },
-  mainTitle: {
-    color: "#5B5A5A",
-    fontSize: 32,
-    marginBottom: 20,
-    marginLeft: 30,
   },
   subTitle: {
     color: "#5B5B5B",
