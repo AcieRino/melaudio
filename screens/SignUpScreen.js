@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, ScrollView, Image, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import axios from 'axios';
 
 const melaudio = require('../assets/melaudio.png');
 
@@ -26,9 +27,31 @@ export default function SignUpScreen({ navigation }) {
             Alert.alert('Error', 'You have to accept the terms and conditions.');
             return;
         }
-        // Add sign-up logic here
-        console.log('Sign-Up:', { username, password, reenterPassword, email });
-        navigation.navigate('MainMenu', { username }); // Navigate to MainMenu after sign-up and pass username
+
+        const userType = isTeacher ? 'teacher' : 'student';
+        const signupData = {
+            username,
+            password,
+            email,
+            userType,
+            instrument: 'piano', // This should be dynamic based on user input
+            level: 'beginner',   // This should be dynamic based on user input
+            cv: isTeacher ? 'CV content' : null, // This should be dynamic based on user input
+            permissions: isTeacher ? null : 'all'
+        };
+
+        axios.post('http://192.168.1.4:3000/api/signup', signupData)
+            .then(response => {
+                if (response.data.success) {
+                    navigation.navigate('MainMenu', { username }); // Navigate to MainMenu after sign-up and pass username
+                } else {
+                    Alert.alert('Error', response.data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error during sign-up:', error);
+                Alert.alert('An error occurred. Please try again.');
+            });
     };
 
     const handleLoginNavigation = () => {
@@ -176,7 +199,7 @@ const styles = StyleSheet.create({
         color: "#2E2E2E",
         fontSize: 40,
         marginBottom: 40,
-        marginLeft: 139
+        textAlign: 'center'
     },
     label: {
         color: "#888888",
@@ -271,7 +294,7 @@ const styles = StyleSheet.create({
     },
     footerContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         marginHorizontal: 84
     },
@@ -281,6 +304,7 @@ const styles = StyleSheet.create({
     },
     loginText: {
         color: "#00D7BD",
-        fontSize: 16
+        fontSize: 16,
+        marginLeft: 5
     }
 });

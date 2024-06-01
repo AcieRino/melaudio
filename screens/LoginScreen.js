@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, ScrollView, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import axios from 'axios';
 
 const melaudio = require('../assets/melaudio.png');
 
@@ -14,9 +15,19 @@ export default function LoginScreen({ navigation }) {
     }, [username, password]);
 
     const handleLogin = () => {
-        // Add your login logic here
-        console.log('Login:', { username, password });
-        navigation.navigate('MainMenu', { username }); // Pass username to MainMenu
+        axios.post('http://192.168.1.4:3000/api/login', { username, password }) 
+            .then(response => {
+                if (response.data.success) {
+                    navigation.navigate('MainMenu', { username, userType: response.data.user.user_type }); // Pass username and userType to MainMenu
+                } else {
+                    console.log('Invalid credentials');
+                    alert('Invalid username or password');
+                }
+            })
+            .catch(error => {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again.');
+            });
     };
 
     const handleSignUpNavigation = () => {

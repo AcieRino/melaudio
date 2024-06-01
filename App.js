@@ -8,7 +8,7 @@ import ProgressTrackerScreen from './screens/ProgressTrackerScreen';
 import OnlineLessonsScreen from './screens/OnlineLessonsScreen';
 import MusicLibraryScreen from './screens/MusicLibraryScreen';
 import SocialNetworkScreen from './screens/SocialNetworkScreen';
-import LearnAndShareScreen from './screens/LearnAndShareScreen'; // Import LearnAndShareScreen
+import LearnAndShareScreen from './screens/LearnAndShareScreen';
 
 const Stack = createStackNavigator();
 

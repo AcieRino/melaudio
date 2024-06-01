@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window');
 const melaudio = require('../assets/melaudio.png');
 
 export default function MainMenuScreen({ route, navigation }) {
-    const { username } = route.params || {};
+    const { username, userType } = route.params || {};
 
     const handlePress = (screen) => {
         navigation.navigate(screen);
@@ -24,18 +24,36 @@ export default function MainMenuScreen({ route, navigation }) {
                 <Text style={styles.helloText}>Hello</Text>
                 <Text style={styles.nameText}>{username}</Text>
                 <View style={styles.grid}>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('OnlineLessons')}>
-                        <Image source={require('../assets/online-lessons.png')} resizeMode="stretch" style={styles.cardImage} />
-                        <Text style={styles.cardText}>Online Lessons</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('SocialNetwork')}>
-                        <Image source={require('../assets/social-network.png')} resizeMode="stretch" style={styles.cardImage} />
-                        <Text style={styles.cardText}>Social Network</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.card} onPress={() => handlePress('ProgressTracker')}>
-                        <Image source={require('../assets/progress.png')} resizeMode="stretch" style={styles.cardImage} />
-                        <Text style={styles.cardText}>Progress Tracker</Text>
-                    </TouchableOpacity>
+                    {userType !== 'admin' && (
+                        <TouchableOpacity style={styles.card} onPress={() => handlePress('OnlineLessons')}>
+                            <Image source={require('../assets/online-lessons.png')} resizeMode="stretch" style={styles.cardImage} />
+                            <Text style={styles.cardText}>Online Lessons</Text>
+                        </TouchableOpacity>
+                    )}
+                    {userType === 'student' && (
+                        <TouchableOpacity style={styles.card} onPress={() => handlePress('SocialNetwork')}>
+                            <Image source={require('../assets/social-network.png')} resizeMode="stretch" style={styles.cardImage} />
+                            <Text style={styles.cardText}>Social Network</Text>
+                        </TouchableOpacity>
+                    )}
+                    {userType !== 'admin' && (
+                        <TouchableOpacity style={styles.card} onPress={() => handlePress('ProgressTracker')}>
+                            <Image source={require('../assets/progress.png')} resizeMode="stretch" style={styles.cardImage} />
+                            <Text style={styles.cardText}>Progress Tracker</Text>
+                        </TouchableOpacity>
+                    )}
+                    {userType === 'admin' && (
+                        <>
+                            <TouchableOpacity style={styles.card} onPress={() => handlePress('EvaluateSubmissions')}>
+                                <Image source={require('../assets/evaluate.png')} resizeMode="stretch" style={styles.cardImage} />
+                                <Text style={styles.cardText}>Evaluate Teacher's Submissions</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.card} onPress={() => handlePress('UserManager')}>
+                                <Image source={require('../assets/user-manager.png')} resizeMode="stretch" style={styles.cardImage} />
+                                <Text style={styles.cardText}>User Manager</Text>
+                            </TouchableOpacity>
+                        </>
+                    )}
                     <TouchableOpacity style={styles.card} onPress={() => handlePress('LearnAndShare')}>
                         <Image source={require('../assets/learn-share.png')} resizeMode="stretch" style={styles.cardImage} />
                         <Text style={styles.cardText}>Learn & Share</Text>
@@ -131,3 +149,4 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
 });
+
