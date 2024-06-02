@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, ScrollView, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { SafeAreaView, View, ScrollView, Image, Text, TextInput, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 import axios from 'axios';
 
 const melaudio = require('../assets/melaudio.png');
@@ -9,6 +9,8 @@ export default function LoginScreen({ navigation }) {
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [email, setEmail] = useState('');
 
     useEffect(() => {
         validateInput();
@@ -35,8 +37,15 @@ export default function LoginScreen({ navigation }) {
     };
 
     const handleForgotPassword = () => {
-        // Handle forgot password logic
-        console.log('Forgot Password');
+        setModalVisible(true);
+    };
+
+    const handleResetPassword = () => {
+        // Handle reset password logic
+        console.log('Reset password for email:', email);
+        alert('Password reset link has been sent to your email.');
+        setModalVisible(false);
+        setEmail('');
     };
 
     const validateInput = () => {
@@ -98,6 +107,41 @@ export default function LoginScreen({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Please enter your email to reset your password</Text>
+                        <TextInput
+                            style={styles.modalInput}
+                            placeholder="Type your email"
+                            placeholderTextColor="#83859C"
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
+                        />
+                        <View style={styles.modalButtonContainer}>
+                            <TouchableOpacity
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Text style={styles.textStyle}>Cancel</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[styles.button, styles.buttonSubmit]}
+                                onPress={handleResetPassword}
+                            >
+                                <Text style={styles.textStyle}>Submit</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 }
@@ -206,5 +250,66 @@ const styles = StyleSheet.create({
         color: "#00D7BD",
         fontSize: 16,
         marginLeft: 5
-    }
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+        fontSize: 16,
+        color: '#333',
+    },
+    modalInput: {
+        width: '100%',
+        padding: 10,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginBottom: 15,
+        fontSize: 16,
+        color: '#333',
+    },
+    modalButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        flex: 1,
+        marginHorizontal: 5,
+    },
+    buttonClose: {
+        backgroundColor: '#f44336',
+    },
+    buttonSubmit: {
+        backgroundColor: '#00D7BD',
+    },
+    textStyle: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 16,
+    },
 });
+

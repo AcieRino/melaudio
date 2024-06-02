@@ -14,13 +14,19 @@ import EvaluateTeachersScreen from './screens/ApplicationEvaluationScreen';
 import UserManagerScreen from './screens/UserManagerScreen'; 
 import UploadFilesScreen from './screens/UploadFilesScreen';
 import MyStudentsScreen from './screens/MyStudentsScreen';
+import IntroScreen from './screens/IntroScreen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Intro">
+        <Stack.Screen 
+          name="Intro" 
+          component={IntroScreen} 
+          options={{ headerShown: false }} 
+        />
         <Stack.Screen 
           name="Login" 
           component={LoginScreen} 
